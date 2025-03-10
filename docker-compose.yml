@@ -1,0 +1,15 @@
+services:
+  connection_db:
+    container_name: connection_db
+    image: postgres:17
+    environment:
+      POSTGRES_PASSWORD: npg_5wzi0fQAFPIB
+      POSTGRES_USER: restAPI_owner
+      POSTGRES_DB: restAPI
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata: {}
