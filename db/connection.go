@@ -1,21 +1,23 @@
 package db
 
 import (
-	"fmt"
 	"database/sql"
+	"fmt"
+
+	_ "github.com/lib/pq"
 )
 
 const (
-	host = "restAPI_owner"
-	port = 5432
-	user = "restAPI"
+	host     = "ep-curly-leaf-a5gfc9g2-pooler.us-east-2.aws.neon.tech"
+	port     = 5432
+	user     = "restAPI_owner"
 	password = "npg_5wzi0fQAFPIB"
-	dbname = "restAPI"
+	dbname   = "restAPI"
 )
 
-func DbConnection () (*sql.DB, error) {
-	psqlInfo := fmt.Sprintf("host=%s port=%d user=&s" + 
-		"password=%s dbname=%s sslmode=disable",
+func DbConnection() (*sql.DB, error) {
+	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
+		"password=%s dbname=%s sslmode=require",
 		host, port, user, password, dbname)
 	db, err := sql.Open("postgres", psqlInfo)
 	if err != nil {
@@ -23,7 +25,7 @@ func DbConnection () (*sql.DB, error) {
 	}
 
 	err = db.Ping()
-	if err != nil{
+	if err != nil {
 		panic(err)
 	}
 
