@@ -5,11 +5,11 @@ import (
 	"go-api/repository"
 )
 
-type ProductUsecase struct{
+type ProductUsecase struct {
 	repository repository.ProductRepository
 }
 
-func NewProductUseCase(repo repository.ProductRepository) ProductUsecase{
+func NewProductUseCase(repo repository.ProductRepository) ProductUsecase {
 	return ProductUsecase{
 		repository: repo,
 	}
@@ -17,4 +17,15 @@ func NewProductUseCase(repo repository.ProductRepository) ProductUsecase{
 
 func (pu *ProductUsecase) GetProducts() ([]model.Product, error) {
 	return pu.repository.GETProducts()
+}
+
+func (pu *ProductUsecase) CreateProduct(product model.Product) (model.Product, error) {
+
+	productId, err := pu.repository.CreateProduct(product)
+	if err != nil {
+		return model.Product{}, err
+	}
+	product.ID = productId
+
+	return product, nil
 }
