@@ -1,4 +1,12 @@
 services:
+  go-app:
+    container_name: go-app
+    image: go-api-rest
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - connection_db
   connection_db:
     container_name: connection_db
     image: postgres:17
